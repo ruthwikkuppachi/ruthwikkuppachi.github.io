@@ -7,9 +7,14 @@ body{
 }
 
 @media only screen and (max-width: 1000px) {
-    .wrapper {
+    .wrapper .content {
       display: flex;
-      justify-content: center;
+      flex-direction: column;
+      justify-content: space-evenly;
+      flex-wrap: wrap;
+    }
+    .wrapper .content .image{
+        margin-bottom: 15px;
     }
 
   }
@@ -19,6 +24,7 @@ body{
     align-items: center;
     flex-wrap: wrap;
     justify-content: space-between;
+    margin-bottom: 15px;
 }
 
 .wrapper .content{
@@ -36,6 +42,7 @@ body{
 .wrapper .content .image > img{
     border: 1px solid red;
     background-color: seashell;
+    border-radius: 4px;
 }
 .wrapper .content .image > p{
     background-color: seashell;
@@ -49,4 +56,8 @@ body{
 
 h1 {
     font-family: 'Sansita Swashed', cursive;
+}
+
+h3{
+    font-style: italic;
 }
