@@ -1,11 +1,17 @@
+body {
+  background-color: burlywood;
+}
+h1 {
+  text-align: center;
+}
 form {
     /* Center the form on the page */
     margin: 0 auto;
     width: 400px;
     /* Form outline */
     padding: 1em;
-    border: 1px solid #CCC;
-    border-radius: 1em;
+    display: flex;
+    align-content: center;
   }
   
   ul {
@@ -62,4 +68,7 @@ form {
     /* This extra margin represent roughly the same space as the space
        between the labels and their text fields */
     margin-left: .5em;
+    background-color: orange;
+    color: white;
+    border-color: black;
   }
