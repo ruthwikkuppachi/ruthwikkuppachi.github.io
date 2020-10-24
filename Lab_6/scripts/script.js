@@ -31,8 +31,9 @@ var y = document.createElement("textarea");
 y.setAttribute("id", "Interests");
 y.setAttribute("cols", 33);
 y.setAttribute("rows", 5);
-y.setAttribute("defaultValue", "Enter your Interests");
+y.appendChild(document.createTextNode("Enter your interests"));
 label2.appendChild(y);
+
 
 let b = document.createElement("button");
 li3.appendChild(b);
