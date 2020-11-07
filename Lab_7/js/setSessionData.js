@@ -19,6 +19,7 @@ function getBusRoute() {
           latMin = route.lat_min;
           lonMax = route.lon_max;
           lonMin = route.lon_min;
+  
           sessionStorage.setItem("latMax", JSON.stringify(latMax));
           sessionStorage.setItem("latMin", JSON.stringify(latMin));
           sessionStorage.setItem("lonMax", JSON.stringify(lonMax));
@@ -33,3 +34,5 @@ function getBusRoute() {
     main.innerHTML = "No value provided";
   }
 }
+
+
