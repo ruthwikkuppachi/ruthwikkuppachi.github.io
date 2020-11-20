@@ -1,5 +1,6 @@
 const main = document.getElementById("main");
 
+
 function getBusRoute() {
   let busRoute = document.getElementById("busroute").value;
 
@@ -15,15 +16,15 @@ function getBusRoute() {
         console.log(route);
         let title,lat_max, lat_min, lon_max, lon_min;
           title = route.title;
-          latMax = route.lat_max;
-          latMin = route.lat_min;
-          lonMax = route.lon_max;
-          lonMin = route.lon_min;
-  
-          sessionStorage.setItem("latMax", JSON.stringify(latMax));
-          sessionStorage.setItem("latMin", JSON.stringify(latMin));
-          sessionStorage.setItem("lonMax", JSON.stringify(lonMax));
-          sessionStorage.setItem("lonMin", JSON.stringify(lonMin));
+          lat_max = route.lat_max;
+          lat_min = route.lat_min;
+          lon_max = route.lon_max;
+          lon_min = route.lon_min;
+          sessionStorage.setItem("main", JSON.stringify(main));
+          sessionStorage.setItem("latMax", JSON.stringify(lat_max));
+          sessionStorage.setItem("latMin", JSON.stringify(lat_min));
+          sessionStorage.setItem("lonMax", JSON.stringify(lon_max));
+          sessionStorage.setItem("lonMin", JSON.stringify(lon_min));
           sessionStorage.setItem("title", JSON.stringify(title));
     })
       .catch((err) => {
@@ -32,7 +33,9 @@ function getBusRoute() {
       });
   } else {
     main.innerHTML = "No value provided";
+    sessionStorage.clear();
   }
 }
+
 
 
