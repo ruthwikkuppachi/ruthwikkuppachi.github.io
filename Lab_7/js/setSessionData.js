@@ -16,6 +16,7 @@ function getBusRoute() {
         console.log(route);
         let title,lat_max, lat_min, lon_max, lon_min;
           title = route.title;
+<<<<<<< HEAD
           lat_max = route.lat_max;
           lat_min = route.lat_min;
           lon_max = route.lon_max;
@@ -25,6 +26,17 @@ function getBusRoute() {
           sessionStorage.setItem("latMin", JSON.stringify(lat_min));
           sessionStorage.setItem("lonMax", JSON.stringify(lon_max));
           sessionStorage.setItem("lonMin", JSON.stringify(lon_min));
+=======
+          latMax = route.lat_max;
+          latMin = route.lat_min;
+          lonMax = route.lon_max;
+          lonMin = route.lon_min;
+  
+          sessionStorage.setItem("latMax", JSON.stringify(latMax));
+          sessionStorage.setItem("latMin", JSON.stringify(latMin));
+          sessionStorage.setItem("lonMax", JSON.stringify(lonMax));
+          sessionStorage.setItem("lonMin", JSON.stringify(lonMin));
+>>>>>>> parent of 6bf463c... Update setSessionData.js
           sessionStorage.setItem("title", JSON.stringify(title));
     })
       .catch((err) => {
