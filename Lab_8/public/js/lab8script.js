@@ -16,10 +16,10 @@ async function getData() {
             for (x = 0; x < 5; x++) {
                 let n = Math.floor((Math.random() * listSize) + 1);
                 let data_reddit = json.data.children[n];
-                subreddit = data_reddit.subreddit;
-                author = data_reddit.author;
-                title = data_reddit.title;
-                ups = data_reddit.ups;
+                let subreddit = data_reddit.subreddit;
+                let author = data_reddit.author;
+                let title = data_reddit.title;
+                let ups = data_reddit.ups;
             
                 let message = "<b>Subreddit </b>: " + subreddit + " <b>Author</b>:" + author + " <b>Title</b>:" + title + " <b>Up votes</b>: " + ups;
                 let list = document.getElementById("redditList");
@@ -45,7 +45,7 @@ async function getData() {
             }
         })
         .then(values => console.log(chartValues));
-        chart.render(); // Do you need to remove the comments from here in order to get it to work?
+        //chart.render(); // Do you need to remove the comments from here in order to get it to work?
 };
 
 window.onload = async function makeChart() {
@@ -67,4 +67,4 @@ window.onload = async function makeChart() {
     chart.render();
 }
 
-window.onload = makeChart();
+//window.onload = makeChart();
