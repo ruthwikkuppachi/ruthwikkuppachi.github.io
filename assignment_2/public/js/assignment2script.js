@@ -388,7 +388,22 @@ async function getPageData(prepend = "") {
       });
     })
 
+  await fetch('./allTasks', settings)
+    .then(res=> res.json())
+    .then((json) =>{
+      let listSize = json.data.length;
+      json.data.forEach(element => {
+        let optionTag = document.createElement("option");
+        let taskName = prepend + "taskName"
+        optionTag.innerHTML = element.taskName;
+        optionTag.setAttribute("value", element.id);
+        document.getElementById(taskName).appendChild(optionTag);
+      });
+    })
+
 };
+
+
 
 window.onload = async function loadPage() {
   getPageData();
