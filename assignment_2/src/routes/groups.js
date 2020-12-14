@@ -45,7 +45,7 @@ groupRouter.post('/group', async (req, res) => {
         if(rows.length > 0){
           nameExists = true;
           res.json({
-            "message": "Name already exists" 
+            "message": "Group already exists" 
           }).send()
           resolve(rows);
         }
