@@ -7,7 +7,7 @@ let path = require('path')
 let bodyParser = require('body-parser')
 let db = require("./database.js")
 // Declare filesystem
-let fs        = require('fs');
+let fs = require('fs');
 
 //The body-parser middleware module, added to the Express.js app, will try to parse the body content 
 //       (URL encoded or JSON) of the post request and store it in req.body object.
