@@ -12,12 +12,12 @@ function submitTask() {
 
   console.log("TaskName:" + taskNameParam);
   console.log("taskDueDate:" + taskDueDate);
-  data = { 
-    'taskDueDate': taskDueDate, 
-    'taskName': taskNameParam, 
-    'group': group, 
-    'person': person, 
-    'priority': priority 
+  data = {
+    'taskDueDate': taskDueDate,
+    'taskName': taskNameParam,
+    'group': group,
+    'person': person,
+    'priority': priority
   };
 
   console.log(JSON.stringify(data))
@@ -81,12 +81,12 @@ function getTask() {
         taskPriority = task.data.priority;
         taskDueDate = task.data.dueDate;
         taskComplete = task.data.complete;
-        message = "ID: " + taskId + "<br>TaskName: " + taskName 
-           +  "<br>Group Name: " + taskGroupName
-           + "<br>FirstName: " + taskFirstName 
-           + "<br>TaskPriority: " + taskPriority
-           + "<br>TaskComplete: " + taskComplete
-           +  "<br> Due Date: " + taskDueDate;
+        message = "ID: " + taskId + "<br>TaskName: " + taskName
+          + "<br>Group Name: " + taskGroupName
+          + "<br>FirstName: " + taskFirstName
+          + "<br>TaskPriority: " + taskPriority
+          + "<br>TaskComplete: " + taskComplete
+          + "<br> Due Date: " + taskDueDate;
       }
       document.getElementById("getTaskContent").innerHTML = message;
     })
@@ -108,7 +108,7 @@ function getTaskToUpdate() {
   let taskURL = "http://localhost:4000/task?taskId=" + taskIdParam;
   const fetchPromise = fetch(taskURL);
   let message = "";
-  
+
   fetchPromise
     .then((response) => {
       return response.json();
@@ -116,7 +116,7 @@ function getTaskToUpdate() {
     .then((task) => {
       console.log("Here");
       console.log(task);
-      let taskId, taskName, taskPriority, taskDueDate, taskComplete,taskPersonId, taskGroupId;
+      let taskId, taskName, taskPriority, taskDueDate, taskComplete, taskPersonId, taskGroupId;
       let message = "ERROR";
       if (typeof task.data.id !== "undefined") {
         taskName = task.data.taskName;
@@ -136,19 +136,19 @@ function getTaskToUpdate() {
         document.getElementById("updateTaskDueDate").value = taskDueDate;
         document.getElementById("updateTaskPriority").value = taskPriority;
         document.getElementById("updateTaskComplete").selectedIndex = taskComplete;
-        
+
       }
-      else{
+      else {
         document.getElementById("updateTaskName").value = "";
         document.getElementById("updateTaskId").value = "";
         document.getElementById("updateTaskDueDate").value = "2020-11-30";
         document.getElementById("updateTaskComplete").value = "";
- 
+
         message = "ERROR";
       }
       //document.getElementById("updatedTaskContent").innerHTML = message;
-      
-      
+
+
     })
     .catch((err) => {
       console.log(err);
@@ -176,13 +176,15 @@ function updateTask() {
   console.log("updateTaskDueDate:" + updateTaskDueDate);
   console.log("updateTaskPriority:" + updateTaskPriority);
   console.log("updateTaskComplete:" + updateTaskComplete);
-  data = { 'taskId': updateTaskId,
-          'taskName':updateTaskName,
-          'taskFirstName':updateTaskFirstName,
-          'taskGroup':updateTaskGroup,
-          'taskDueDate':updateTaskDueDate,
-          'taskPriority': updateTaskPriority,
-          'taskComplete':updateTaskComplete };
+  data = {
+    'taskId': updateTaskId,
+    'taskName': updateTaskName,
+    'taskFirstName': updateTaskFirstName,
+    'taskGroup': updateTaskGroup,
+    'taskDueDate': updateTaskDueDate,
+    'taskPriority': updateTaskPriority,
+    'taskComplete': updateTaskComplete
+  };
 
   console.log(JSON.stringify(data))
   let taskURL = "http://localhost:4000/task?taskId=" + updateTaskId;
@@ -285,8 +287,8 @@ function submitNewPerson() {
         personId = person.id;
         message = "Message: " + person.message + " firstName: " + firstName + "<br>personId: " + personId + "<br> ";
       }
-      else if(typeof person !== "undefined"){
-        message = "Message: " + person.message ;
+      else if (typeof person !== "undefined") {
+        message = "Message: " + person.message;
       }
       document.getElementById("postNewPersonContent").innerHTML = message;
     })
@@ -301,7 +303,7 @@ function submitNewPerson() {
  ------ ADD NEW GROUP ------
 */
 
-function submitNewGroup(){
+function submitNewGroup() {
   console.log("Called submitNewGroup");
   let groupName = document.getElementById("addGroupName").value;
 
@@ -332,8 +334,8 @@ function submitNewGroup(){
         groupId = group.id;
         message = "Message: " + group.message + " name: " + groupName + "<br>groupId: " + groupId + "<br> ";
       }
-      else if(typeof group !== "undefined"){
-        message = "Message: " + group.message ;
+      else if (typeof group !== "undefined") {
+        message = "Message: " + group.message;
       }
       document.getElementById("postNewGroupContent").innerHTML = message;
     })
@@ -389,8 +391,8 @@ async function getPageData(prepend = "") {
     })
 
   await fetch('./allTasks', settings)
-    .then(res=> res.json())
-    .then((json) =>{
+    .then(res => res.json())
+    .then((json) => {
       let listSize = json.data.length;
       json.data.forEach(element => {
         let optionTag = document.createElement("option");

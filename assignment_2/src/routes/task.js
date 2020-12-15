@@ -8,16 +8,16 @@ router.get('/allTasks', (req, res) => {
     console.log("Get all tasks");
     let sql = "select * from tasks";
     db.all(sql, (err, row) => {
-      if (err) {
-        res.status(400).json({ "error": err.message });
-        return;
-      }
-      res.json({
-        "message": "success",
-        "data": row
-      })
+        if (err) {
+            res.status(400).json({ "error": err.message });
+            return;
+        }
+        res.json({
+            "message": "success",
+            "data": row
+        })
     });
-  })
+})
 // Create a new task
 // POST localhost:<port>/task
 router.post('/task', (req, res) => {
@@ -33,27 +33,27 @@ router.post('/task', (req, res) => {
         personId: req.body.person,
         priority: req.body.priority
     }
-    
-    if(!task.dueDate || task.groupId == 0 || task.personId == 0){
+
+    if (!task.dueDate || task.groupId == 0 || task.personId == 0) {
         res.json({
             "message": "error: Must supply due date, group and firstname"
         })
         return;
     }
-    var sql ='INSERT INTO tasks (taskName, dueDate, groupId, personId, priority, complete) VALUES (?,?,?,?,?,?)'
-    var params =[task.name, task.dueDate, task.groupId, task.personId, task.priority, 0]
+    var sql = 'INSERT INTO tasks (taskName, dueDate, groupId, personId, priority, complete) VALUES (?,?,?,?,?,?)'
+    var params = [task.name, task.dueDate, task.groupId, task.personId, task.priority, 0]
     db.run(sql, params, function (err, result) {
-        if (err){
-            res.status(400).json({"error": err.message})
+        if (err) {
+            res.status(400).json({ "error": err.message })
             return;
         }
         res.json({
             "message": "success",
             "data": task,
-            "id" : this.lastID
+            "id": this.lastID
         })
     });
-    
+
 })
 
 
@@ -63,21 +63,21 @@ router.get('/task', (req, res) => {
         return res.status(400).send('Missing URL parameter id')
     }
     let sql = "select tasks.id, taskName, dueDate, complete, priority, firstName, personId, groupId, groups.name as groupName" +
-      " from tasks INNER JOIN PEOPLE on PEOPLE.id = tasks.personId " +
-      " INNER JOIN GROUPS on GROUPS.ID = tasks.groupId" +
-      " where tasks.id = ?"
+        " from tasks INNER JOIN PEOPLE on PEOPLE.id = tasks.personId " +
+        " INNER JOIN GROUPS on GROUPS.ID = tasks.groupId" +
+        " where tasks.id = ?"
     console.log("req.query.taskId: " + req.query.taskId)
     let params = [req.query.taskId]
     db.get(sql, params, (err, row) => {
         if (err) {
-          res.status(400).json({"error":err.message});
-          return;
+            res.status(400).json({ "error": err.message });
+            return;
         }
         res.json({
-            "message":"success",
-            "data":row
+            "message": "success",
+            "data": row
         })
-      });
+    });
 })
 
 
@@ -93,14 +93,14 @@ data = { 'taskId': updateTaskId,
 router.put('/task', (req, res) => {
     console.log("PUT called")
     var data = {
-        id : req.query.taskId, // **Note that I'm pulling this from the 'query' vs the 'body'
+        id: req.query.taskId, // **Note that I'm pulling this from the 'query' vs the 'body'
         taskName: req.body.taskName,
-        personId :  req.body.taskFirstName,
-        groupId :  req.body.taskGroup,
-        dueDate :  req.body.taskDueDate,
-        priority :  req.body.taskPriority,
-        complete :  req.body.taskComplete
-        
+        personId: req.body.taskFirstName,
+        groupId: req.body.taskGroup,
+        dueDate: req.body.taskDueDate,
+        priority: req.body.taskPriority,
+        complete: req.body.taskComplete
+
     }
     console.log("data.id:" + data.id + " name:" + data + " due_date:" + data.dueDate)
     if (!data.id) {
@@ -117,8 +117,8 @@ router.put('/task', (req, res) => {
            WHERE id = ?`,
         [data.taskName, data.dueDate, data.groupId, data.personId, data.complete, data.priority, data.id],
         function (err, result) {
-            if (err){
-                res.status(400).json({"error": res.message})
+            if (err) {
+                res.status(400).json({ "error": res.message })
                 console.log(err);
                 return;
             }
@@ -126,9 +126,9 @@ router.put('/task', (req, res) => {
                 message: "success",
                 data: data,
                 changes: this.changes
-                
+
             })
-    });
+        });
 })
 
 //Delete
@@ -140,12 +140,12 @@ router.delete('/task', (req, res) => {
         'DELETE FROM tasks WHERE id = ?',
         req.query.taskId,
         function (err, result) {
-            if (err){
-                res.status(400).json({"error": res.message})
+            if (err) {
+                res.status(400).json({ "error": res.message })
                 return;
             }
-            res.json({"message":"deleted " , changes: this.changes})
-    });
+            res.json({ "message": "deleted ", changes: this.changes })
+        });
 })
 
 
