@@ -17,9 +17,9 @@
         <div class="flexbox-item">
             -- Add New Task --
             <label for="taskName">Task Name:</label>
-            <input type="text" id="taskName" name="taskName"/>
+            <input type="text" id="taskName" name="taskName" />
             <br>
-            <div class = "flexbox-selction-container">
+            <div class="flexbox-selction-container">
                 <div class="flexbox-item">
                     <label for="group">Group:</label>
 
@@ -50,7 +50,7 @@
             <label for="taskDueDate">Due date:</label>
             <input type="date" id="taskDueDate" id="taskDueDate" name="taskDueDate" min="2020-11-01" max="2022-12-31">
             <button onclick="submitTask()" class="flexbox-button">Add new task</button>
-          
+
             <p id="postTaskContent"></p>
 
         </div>
@@ -81,7 +81,7 @@
             <button onclick="getTaskToUpdate()" class="flexbox-button">Get Task</button>
             <div>
                 <label for="updateTaskId">Task ID:</label><br>
-                <input type="text" id="updateTaskId" readonly/>
+                <input type="text" id="updateTaskId" readonly />
                 <br>
                 <label for="updateTaskName">Task Name:</label><br>
                 <input type="text" id="updateTaskName" />
@@ -97,16 +97,16 @@
                 </select><br>
                 <label for="updateTaskDueDate">Due Date:</label><br>
                 <input type="date" id="updateTaskDueDate" name="updateTaskDueDate" min="2020-11-01" max="2022-12-31">
-                <br> 
-                <label for="updateTaskPriority">Task Priority</label><br> 
-                <input type="text" id="updateTaskPriority" name="updateTaskPriority" >
-                <br> 
-                <label for="updateTaskComplete">Task Complete</label><br> 
+                <br>
+                <label for="updateTaskPriority">Task Priority</label><br>
+                <input type="text" id="updateTaskPriority" name="updateTaskPriority">
+                <br>
+                <label for="updateTaskComplete">Task Complete</label><br>
                 <select name="updateTaskComplete" id="updateTaskComplete">
                     <option value="0">False</option>
                     <option value="1">True</option>
                 </select>
-            
+
                 <br>
                 <button onclick="updateTask()" class="flexbox-button">Update Task</button>
             </div>
@@ -128,10 +128,10 @@
         <div class="flexbox-item">
             -- Add New Person --
             <label for="addFirstName">First Name:</label>
-            <input type="text" id="addFirstName" name="addFirstName"/>
+            <input type="text" id="addFirstName" name="addFirstName" />
             <br>
             <button onclick="submitNewPerson()" class="flexbox-button">Add new person</button>
-          
+
             <p id="postNewPersonContent"></p>
 
         </div>
@@ -139,7 +139,7 @@
         <div class="flexbox-item">
             -- Add New Group --
             <label for="addGroupName">Group Name</label>
-            <input type="text" id="addGroupName" name="addGroupName"/>
+            <input type="text" id="addGroupName" name="addGroupName" />
             <br>
             <button onclick="submitNewGroup()" class="flexbox-button">Add new group</button>
 
@@ -150,11 +150,51 @@
             -- Search for Tasks --
             <form class="search-form">
                 <input type="text" class="search">
-                
+                <ul class='suggestions'>
+                    <li></li>    
+                </ul>
             </form>
         </div>
 
     </div>
+    
+    <script>
+       const endpoint = 'http://localhost:4000/allTasks';
+
+        let tasks = [];
+
+        fetch(endpoint)
+        .then(blob => blob.json())
+        .then(data => tasks = data)
+
+
+        function findMatches(wordToMatch, tasks) {
+        return tasks.data.filter(task => {
+            const regex = new RegExp(wordToMatch, 'gi')
+            return task.taskName.match(regex)
+        });
+    }
+
+    function displayMatches(){
+        const matchArray = findMatches(this.value, tasks);
+        const html = matchArray.map(task => {
+            const regex = new RegExp(this.value, 'gi');
+            const taskName = task.taskName.replace(regex, `<mark>${this.value}</mark>`)
+            return `
+            <li>
+                <span class = "name">${taskName}</span>
+                </li>
+                `;
+        }).join('');
+        suggestions.innerHTML = html;
+    }
+
+    const searchInput = document.querySelector('.search');
+    const suggestions = document.querySelector('.suggestions');
+
+    searchInput.addEventListener('change', displayMatches);
+    searchInput.addEventListener('keyup', displayMatches); 
+    </script>
 </body>
 
 </html>
